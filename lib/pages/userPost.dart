@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:flutter_apis/api%20link/api_link.dart';
 import 'package:http/http.dart' as http;
-import '../model class/post_model.dart';
+import '../model class/user_data_model.dart';
 import 'comments_bottom_sheet.dart';
 
 class UserPost extends StatefulWidget {
@@ -14,6 +14,7 @@ class UserPost extends StatefulWidget {
 }
 
 class _UserPostState extends State<UserPost> {
+
   @override
   void initState() {
     super.initState();
@@ -21,8 +22,7 @@ class _UserPostState extends State<UserPost> {
   }
 
   bool isLoading = false;
-  // Map<String, dynamic>? postList;
-  PostModel? post;
+  UserPostDataModel? post;
 
   Future<void> userPost() async {
     setState(() {
@@ -35,7 +35,7 @@ class _UserPostState extends State<UserPost> {
         var task = jsonDecode(response.body);
         // print(task);
         setState(() {
-          post = PostModel.fromJson(task);
+          post = UserPostDataModel.fromJson(task);
         });
       } else {
         print("API can't be call properly ");

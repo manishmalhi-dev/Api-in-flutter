@@ -1,4 +1,4 @@
-import 'package:flutter_apis/model%20class/user%20details%20model/address_model.dart';
+import 'address_model.dart';
 import 'company_model.dart';
 
 class UserData {

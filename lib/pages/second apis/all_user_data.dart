@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:flutter_apis/model%20class/user%20details%20model/user_data.dart';
 import 'package:http/http.dart' as http;
 import '../../api link/api_link.dart';
+import '../../model class/second api user model/user_data.dart';
 
 class AllUserData extends StatefulWidget {
   const AllUserData({super.key});
@@ -16,7 +16,6 @@ class _AllUserDataState extends State<AllUserData> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     getData();
   }
