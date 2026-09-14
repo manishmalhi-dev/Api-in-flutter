@@ -21,7 +21,7 @@ class _UserPostState extends State<UserPost> {
   }
 
   bool isLoading = false;
-  Map<String, dynamic>? postList;
+  // Map<String, dynamic>? postList;
   PostModel? post;
 
   Future<void> userPost() async {

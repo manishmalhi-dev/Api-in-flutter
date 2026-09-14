@@ -4,6 +4,8 @@ import 'package:flutter_apis/api%20link/api_link.dart';
 import 'package:flutter_apis/model%20class/user_data_model.dart';
 import 'package:go_router/go_router.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
+import 'package:flutter_apis/provider/theme_provider.dart';
 
 class HomePages extends StatefulWidget {
   const HomePages({super.key});
@@ -60,19 +62,7 @@ class _HomePagesState extends State<HomePages> {
     });
     try {
       final responseIs = await http.get(Uri.parse(ApiLink.postUrl));
-      // List<Map<String, dynamic>> data = List<Map<String, dynamic>>.from(jsonDecode(responseIs.body));
       List data = jsonDecode(responseIs.body);
-      // print(data[0]["title"]);
-
-      // for (int a = 0; a < data.length; a++) {
-      //   UserDetailClass newOne = UserDetailClass(
-      //     userId: data[a]["userId"],
-      //     id: data[a]["id"],
-      //     title: data[a]["title"],
-      //     body: data[a]["body"],
-      //   );
-      //   userModel.add(newOne);
-      // }
 
       userPostData = data.map((item) => UserPostDataModel.fromJson(item)).toList();
 
@@ -98,8 +88,45 @@ class _HomePagesState extends State<HomePages> {
         centerTitle: true,
         foregroundColor: Colors.white,
         backgroundColor: Colors.blue,
+        actions: [
+          IconButton(onPressed: (){
+            context.read<ThemeProvider>().toggleTheme();
+          }, icon: Icon(Icons.sunny)),
+          Builder(
+            builder: (context) {
+              return IconButton(onPressed: (){
+                Scaffold.of(context).openEndDrawer();
+              }, icon: Icon(Icons.menu));
+            }
+          ),
+        ],
       ),
-      endDrawer: Drawer(),
+      endDrawer: Drawer(
+        child: ListView(
+          children: [
+            Container(
+              height: 200,
+              width: double.infinity,
+              color: Colors.blue,
+            ),
+            ListTile(
+              leading: Icon(Icons.home),
+              title: Text("Home"),
+              onTap: (){
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.account_box_outlined),
+              title: Text("about"),
+              onTap: (){
+                Navigator.pop(context);
+              },
+            ),
+
+          ],
+        ),
+      ),
 
       body: Center(
         child: isLoading == true
